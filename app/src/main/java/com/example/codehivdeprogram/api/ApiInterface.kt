@@ -1,4 +1,4 @@
-package com.example.registration.api
+package com.example.codehivdeprogram.models
 
 import com.example.registration.models.*
 import retrofit2.Call
