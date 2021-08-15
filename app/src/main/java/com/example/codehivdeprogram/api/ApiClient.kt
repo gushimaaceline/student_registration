@@ -1,4 +1,4 @@
-package com.example.codehivdeprogram.models
+package com.example.codehivdeprogram.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
