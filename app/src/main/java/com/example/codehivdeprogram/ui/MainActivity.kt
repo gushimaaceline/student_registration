@@ -1,93 +1,86 @@
 package com.example.codehivdeprogram.ui
-
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
-import com.example.codehivdeprogram.R
-import com.example.codehivdeprogram.api.ApiClient
-import com.example.codehivdeprogram.api.ApiInterface
-import com.example.codehivdeprogram.databinding.ActivityMainBinding
-import com.example.codehivdeprogram.models.RegistrationResponse
-import com.example.codehivdeprogram.viewmodel.UserViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import com.example.codehivdeprogram.models.RegistrationRequest as RegistrationRequest
+import com.example.registration.databinding.ActivityMainBinding
+import com.example.registration.models.LogInRequest
+import com.example.registration.models.RegistrationRequest
+import com.example.registration.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     val userViewModel: UserViewModel by viewModels()
 
+
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var nationality= arrayOf("Rwandan","Ugandan","Kenyan","South Sudan")
-        var nationalityAdapter= ArrayAdapter(baseContext,android.R.layout.simple_spinner_item,nationality)
-        binding.spNationality.adapter= nationalityAdapter
+        var nationality = arrayListOf<String>("Kenyan", "Ugandan", "Rwandese", "South Sudanes")
+        var nationalityAdapter =ArrayAdapter(baseContext, android.R.layout.simple_spinner_item, nationality)
+        binding.spNationality.adapter=nationalityAdapter
         nationalityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.btnLogin.SetOnClickListner{
-            var intent= Intent(baseContext,LoginActivity::class.java)
+        binding.btnLogIn1.setOnClickListener {
+            var intent = Intent(baseContext, LogIn::class.java)
             startActivity(intent)
         }
-                
-        }
-
     }
 
-    override fun onResume(){
+
+    override fun onResume() {
         super.onResume()
-        binding.btnRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener{
+            if (binding.etName.text.toString().isEmpty()||
+                binding.etDob.text.toString().isEmpty()||
+                binding.etPhoneNumber.text.toString().isEmpty()||
+                binding.etEmail.text.toString().isEmpty() ||
+                binding.etPassword.text.toString().isEmpty()
 
-            if(binding. etname.text.toString().isEmpty()||
-                binding.etdob.text.toString().isEmpty()||
-                binding.etmail.text.toString().isEmpty()||
-                binding.etpassword.text.toString().isEmpty()||
-                binding.etPhone.text.toString().isEmpty()
             ){
-                binding.etname.setError("Name is required")
-                binding.etdob.setError("Date of birth is required")
-                binding.etmail.setError("Email is required")
-                binding.etpassword.setError("Date is required")
-                binding.etPhone.setError("Phone number is required")
+                binding.etName.setError("Name required")
+                binding.etDob.setError("Date of birth required")
+                binding.etPhoneNumber.setError("Number required")
+                binding.etEmail.setError("Email required")
+                binding.etPassword.setError("Password required")
+
             }
-            var name= binding.etname.text.toString()
-            var dob= binding.etdob.text.toString()
-            var email= binding.etmail.text.toString()
-            var password= binding.etpassword.text.toString()
-            var phone= binding.etPhone.text.toString()
 
-            var regRequest= RegistrationRequest(
-                name= binding.etname.text.toString()
-                dob= binding.etdob.text.toString()
-                email= binding.etmail.text.toString()
-                password= binding.etpassword.text.toString()
-                phoneNumber= binding.etPhone.text.toString()
-                nationality= binding.spNationality.selectItem.toString().uppercase()
+            var name = binding.etName.text.toString()
+            var Dob = binding.etDob.text.toString()
+            var phoneNumber = binding.etPassword.text.toString()
+            var email = binding.etEmail.text.toString()
+            var password = binding.etPassword.text.toString()
 
+            var regRequest = RegistrationRequest(
+                name = binding.etName.text.toString(),
+                phoneNumber = binding.etPhoneNumber.text.toString(),
+                email = binding.etEmail.text.toString(),
+                dateOfBirth = binding.etDob.text.toString(),
+                password = binding.etPassword.text.toString(),
+                nationality =binding.spNationality.selectedItem.toString().uppercase()
             )
-            var intent= Intent(baseContext, LoginActivity ::class.java)
+
+            var intent = Intent(baseContext, LogIn::class.java)
             startActivity(intent)
 
-            userViewModel.registrationStudent(regRequest)
+            userViewModel.registerStudent(regRequest)
         }
-        userViewModel.regFailedLiveData.observe(this, { regResponse ->
-            if (!regResponse.studentId isNullOrEmpty()){
-                Toast.makeText(baseContext,"Registration Successfull",
-                    Toast.LENGTH_LONG).show()
-                
+        userViewModel.registrationLiveData.observe(this, { regResponse->
+            if (!regResponse.studentId.isNullOrEmpty()){
+                Toast.makeText(baseContext, "Registration successful", Toast.LENGTH_LONG).show()
+            }
         })
-            userViewModel.regFailedLiveData.observe(this, { error ->
-                Toast.makeText(baseContext, "error", Toast.LENGTH_LONG).show()
-
-            })
-
-        }
+        userViewModel.regFailedLiveData.observe(this, { error->
+            Toast.makeText(baseContext, error, Toast.LENGTH_LONG).show()
+        })
     }
+}
+
 
 
 
@@ -184,4 +177,5 @@ class MainActivity : AppCompatActivity() {
 //            val intent = Intent(baseContext, LogIn::class.java)
 //            startActivity(intent)
 //        }
-//
+//}
+
