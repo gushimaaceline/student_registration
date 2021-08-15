@@ -1,48 +1,19 @@
 package com.example.codehivdeprogram.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.codehivdeprogram.R
-import com.example.codehivdeprogram.databinding.ActivityCourseDetailsBinding
-import com.example.codehivdeprogram.databinding.ActivityMainBinding
+import android.widget.Button
+import com.example.registration.R
 
 class CourseDetailsActivity : AppCompatActivity() {
-    lateinit var binding: ActivityCourseDetailsBinding
-    val courseViewModel:
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_details)
-
-
-
+        var btnCourseDetails = findViewById<Button>(R.id.btnCourseDetails)
+        btnCourseDetails.setOnClickListener {
+            var intent = Intent(baseContext, LogIn::class.java)
+            startActivity(intent)
+        }
     }
 }
-
-//        displayCourses()
-//        fun displayCourses(){
-//            var rvCourses= findViewById<RecyclerView>(R.id.rvCourses)
-//            var courseList= listOf(
-//                Course("MBT01",
-//                    "Mobile Development",
-//                    "Introduction to Android",
-//                    "John"),
-//
-//                Course("NPT05",
-//                    "Backend Development",
-//                    "Introduction to python",
-//                    "James"),
-//
-//                Course("NTP031",
-//                    "Frontend Development",
-//                    "Introduction to JavaScript",
-//                    "Purity"),
-//            )
-//
-//            var courseAdapter= CourseAdapter(courseList)
-//            rvCourses.layoutManager= LinearLayoutManager(baseContext)
-//            rvCourses.adapter= courseAdapter
-//
-//        }
-
