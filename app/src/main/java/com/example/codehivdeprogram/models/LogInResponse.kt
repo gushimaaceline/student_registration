@@ -1,4 +1,4 @@
-package com.example.registration.models
+package com.example.codehivdeprogram.models
 
 import com.google.gson.annotations.SerializedName
 
