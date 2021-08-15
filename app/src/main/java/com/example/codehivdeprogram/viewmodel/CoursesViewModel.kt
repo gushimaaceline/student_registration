@@ -3,24 +3,24 @@ package com.example.codehivdeprogram.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codehivdeprogram.models.CoursesResponse
-import com.example.codehivdeprogram.repository.CoursesRepository
+import com.example.registration.models.CoursesResponse
+import com.example.registration.repository.CoursesRepository
 import kotlinx.coroutines.launch
 
-class CoursesViewModel:ViewModel(){
-    var coursesLiveData= MutableLiveData<List<CoursesResponse>>()
-    var courseFailedLiveData= MutableLiveData<String>()
-    var coursesResponse= CoursesRepository()
+class CoursesViewModel: ViewModel() {
+        var coursesLiveData = MutableLiveData<List<CoursesResponse>>()
+        var coursesFailedLiveData = MutableLiveData<String>()
+        var coursesRepository = CoursesRepository()
 
-    fun courseList(){
-        viewModelScope.launch {
-            var response= courseRepository.courses()
-            if (response.isSuccessful){
-                courseFailedLiveData.postValue(response.body())
-            }
-            else{
-                courseFailedLiveData.postValue(response.errorBody()?.string())
+        fun coursesList(){
+            viewModelScope.launch {
+                var response = coursesRepository.courses()
+                if (response.isSuccessful){
+                    coursesLiveData.postValue(response.body())
+                }
+                else{
+                    coursesFailedLiveData.postValue(response.errorBody()?.string())
+                }
             }
         }
     }
-}
