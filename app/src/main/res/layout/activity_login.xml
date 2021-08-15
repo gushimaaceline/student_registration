@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -16,7 +16,7 @@
         android:fontFamily="cursive"
         android:text="Login With Your Email!!"
         android:textAlignment="center"
-        android:textColor="#000"
+        android:textColor="#009688"
         android:textSize="40sp"
         android:textStyle="bold"
 

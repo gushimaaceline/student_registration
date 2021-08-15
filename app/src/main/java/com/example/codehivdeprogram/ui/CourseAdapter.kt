@@ -1,6 +1,5 @@
-import com.example.codehivdeprogram.Course
+package com.example.codehivdeprogram.ui
 
-;
 import com.example.codehivdeprogram.R
 
 //package com.example.codehivdeprogram
@@ -9,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 
 class CourseAdapter(var courseList: List<Course>):RecyclerView.Adapter<CoursesViewHolder>() {
