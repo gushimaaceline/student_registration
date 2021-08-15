@@ -1,27 +1,27 @@
-package com.example.codehivdeprogram.repository
+package com.example.registration.repository
 
-import com.example.codehivdeprogram.api.ApiClient
-import com.example.codehivdeprogram.api.ApiInterface
-import com.example.codehivdeprogram.models.LoginRequest
-import com.example.codehivdeprogram.models.LoginResponse
-import com.example.codehivdeprogram.models.RegistrationRequest
-import com.example.codehivdeprogram.models.RegistrationResponse
-import kotlinx.coroutines.Dispatchers.IO
-import okhttp3.Dispatcher
+import com.example.registration.api.ApiClient
+import com.example.registration.api.ApiInterface
+import com.example.registration.models.LogInRequest
+import com.example.registration.models.LogInResponse
+import com.example.registration.models.RegistrationRequest
+import com.example.registration.models.RegistrationResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class UserRepository {
-    var apiInterface= ApiClient.buildApiClient(ApiInterface::class.java)
+    var apiInterface = ApiClient.buildApiClient(ApiInterface::class.java)
 
-    suspend fun registerStudent(registrationRequest: RegistrationRequest):Response<RegistrationResponse> = withContex(Dispatcher.IO){
-        var response= apiInterface.registerStudent(registrationRequest)
-        return@withContex response
-
-    }
-    suspend fun logIn(loginRequest: LoginRequest):Response<LoginResponse>=
-    withContext(Dispatchers.IO){
-        var response= apiInterface.loginStudent(loginRequest)
-        return@withContext response
+    suspend fun registerStudent(registrationRequest: RegistrationRequest):
+            Response<RegistrationResponse> = withContext(Dispatchers.IO){
+                var response = apiInterface.registerStudent(registrationRequest)
+                    return@withContext response
     }
 
+    suspend fun login(logInRequest: LogInRequest):Response<LogInResponse> =
+        withContext(Dispatchers.IO){
+            var response = apiInterface.logInStudent(logInRequest)
+            return@withContext response
+        }
 }
