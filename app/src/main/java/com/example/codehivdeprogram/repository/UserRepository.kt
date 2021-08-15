@@ -1,4 +1,4 @@
-package com.example.codehiveprogram.repository
+package com.example.codehivdeprogram.repository
 
 import com.example.registration.api.ApiClient
 import com.example.registration.api.ApiInterface
