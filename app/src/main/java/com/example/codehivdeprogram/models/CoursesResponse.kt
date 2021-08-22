@@ -12,3 +12,4 @@ data class CoursesResponse(
     var description: String,
     var instructor: String
 )
+
