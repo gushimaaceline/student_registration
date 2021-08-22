@@ -32,3 +32,5 @@ class CoursesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     var tvInstructor = itemView.findViewById<TextView>(R.id.tvInstructor)
     var tvcode = itemView.findViewById<TextView>(R.id.tvCode)
 }
+
+ 
